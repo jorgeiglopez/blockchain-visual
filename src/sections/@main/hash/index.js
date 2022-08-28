@@ -1,1 +1,1 @@
-export { default as HashBlock } from './HashBlock'
+export {default as HashBlock} from './HashBlock';
