@@ -50,20 +50,26 @@ const Block = ({ id = 1, previous }) => {
 
   return (
     <Card>
-      <div style={{ display: "flex" }}>
-        <CardHeader title={"The Block - ID #" + id} style={{ padding: '1.1em' }} />
-        <Iconify
-            icon={valid ? 'eva:people-fill' : 'eva:arrow-ios-forward-fill'}
-            sx={{ width: 16, height: 16, ml: 1 }}
+      <div style={{ display: "flex", padding: '16px' }}>
+        <div style={{ display: "flex" }}>
+          <CardHeader title={"The Block  -  ID #" + id} style={{ padding: 0 }}/>
+          <Iconify style={{ marginLeft: '15px' }}
+            icon={valid ? 'ant-design:check-circle-filled' : 'charm:circle-cross'}
+            sx={{ width: '2rem', height: '2rem', ml: 1 }}
+            color={valid ? 'green' : 'red'}
           />
-        <Button style={{ marginLeft: "auto" }}
-          disabled={valid}
-          variant="contained"
-          onClick={() => mine(input.data)
-            .then(result => setInput({ ...input, nonce: result }))}
-        >
-          MINE!
-        </Button>
+        </div>
+        <div style={{marginLeft: 'auto' }}>
+          <Button
+            disabled={valid}
+            variant="contained"
+            onClick={() => mine(input.data)
+              .then(result => setInput({ ...input, nonce: result }))}
+          >
+            MINE!
+          </Button>
+
+        </div>
       </div>
       <Divider style={{ marginBottom: '1em' }} />
       <TableWrapper rows={[dataRow, nonceRow, hashRow]} />
