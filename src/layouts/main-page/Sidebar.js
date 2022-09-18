@@ -8,8 +8,9 @@ import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 import navConfig from './NavConfig';
+import { useLocation } from 'react-router-dom';
 
-const DRAWER_WIDTH = 280;
+const DRAWER_WIDTH = 220;
 const RootStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     flexShrink: 0,
@@ -23,15 +24,15 @@ Sidebar.propTypes = {
 };
 
 export default function Sidebar({ isOpenSidebar, onCloseSidebar }) {
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
   const isDesktop = useResponsive('up', 'lg');
 
-  // useEffect(() => {
-  //   if (isOpenSidebar) {
-  //     onCloseSidebar();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [pathname]);
+  useEffect(() => {
+    if (isOpenSidebar) {
+      onCloseSidebar();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const renderContent = (
     <Scrollbar sx={{

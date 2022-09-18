@@ -1,4 +1,4 @@
-import { Button, Card, CardHeader, Divider } from '@mui/material';
+import { Box, Button, Card, CardHeader, Divider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { sha256 } from '../../../utils/crypto';
 import { mine, isValid } from '../../../utils/mine';
@@ -6,13 +6,15 @@ import TableWrapper from '../../../components/Table';
 import Iconify from '../../../components/Iconify';
 
 
-const Block = ({ id = 1, previous }) => {
-  const [input, setInput] = useState({ data: '', nonce: '88484' });
+const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => {
+  const [input, setInput] = useState(setup);
   const [hashed, setHashed] = useState('');
   const [valid, setValid] = useState(false);
-
+  
   useEffect(() => {
-    sha256(input.data.concat(input.nonce)).then(val => {
+    console.log("input::  ", input)
+    const toHash = input.data.concat(!!input.previous? input.previous : '').concat(input.nonce);
+    sha256(toHash).then(val => {
       setHashed(val);
       setValid(isValid(val));
     });
@@ -48,19 +50,29 @@ const Block = ({ id = 1, previous }) => {
     },
   };
 
+  const prevRow = !!input.previous ? {
+    leftTitle: 'Previous:',
+    textFieldsProps: {
+      label: 'Previous block hash',
+      disabled: true,
+      value: input.previous
+    },
+  } : null;
+
   return (
     <Card>
-      <div style={{ display: "flex", padding: '16px' }}>
-        <div style={{ display: "flex" }}>
-          <CardHeader title={"The Block  -  ID #" + id} style={{ padding: 0 }}/>
-          <Iconify style={{ marginLeft: '15px' }}
+      <Box display={'flex'} padding={'16px'}>
+        <Box display={'flex'}>
+          <CardHeader title={"The Block  -  ID #" + input.id} style={{ padding: 0 }} />
+          <Iconify
             icon={valid ? 'ant-design:check-circle-filled' : 'charm:circle-cross'}
-            sx={{ width: '2rem', height: '2rem', ml: 1 }}
+            sx={{ width: '2rem', height: '2rem', ml: '15px', mt: '2px' }}
             color={valid ? 'green' : 'red'}
           />
-        </div>
-        <div style={{marginLeft: 'auto' }}>
+        </Box>
+        <Box ml={'auto'}>
           <Button
+            ml={'auto'}
             disabled={valid}
             variant="contained"
             onClick={() => mine(input.data)
@@ -68,11 +80,10 @@ const Block = ({ id = 1, previous }) => {
           >
             MINE!
           </Button>
-
-        </div>
-      </div>
+        </Box>
+      </Box>
       <Divider style={{ marginBottom: '1em' }} />
-      <TableWrapper rows={[dataRow, nonceRow, hashRow]} />
+      <TableWrapper rows={[dataRow, nonceRow, hashRow, prevRow]} />
     </Card>
   );
 };
