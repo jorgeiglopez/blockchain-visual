@@ -12,7 +12,6 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
   const [valid, setValid] = useState(false);
   
   useEffect(() => {
-    console.log("input::  ", input)
     const toHash = input.data.concat(!!input.previous? input.previous : '').concat(input.nonce);
     sha256(toHash).then(val => {
       setHashed(val);

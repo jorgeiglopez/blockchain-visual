@@ -4,9 +4,23 @@ const blockSignature = '0000';
 
 export const mine = async data => {
   for (let index = 0; index < 1000000; index++) {
-    const hash = await sha256(data.concat(index.toString()));
+    const hash = await sha256(data.concat(index.toString())); // TODO: change here to receive the entire concatenation
     if(hash.startsWith(blockSignature)){
       return index;
+    }
+  }
+  return null;
+}
+
+export const mineBlock = async block => {
+  for (let index = 0; index < 1000000; index++) {
+    const toHash = block.data.concat(!!block.previous ? block.previous : '').concat(index);
+    const hash = await sha256(toHash);
+    if(hash.startsWith(blockSignature)){
+      block.hash = hash;
+      block.nonce = index;
+      block.valid = isValid(hash)
+      return block;
     }
   }
   return null;
