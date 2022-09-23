@@ -4,12 +4,12 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: 'Hash Function',
+    title: 'Función Hash',
     path: '/main/hash',
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
-    title: 'The Block',
+    title: 'El Bloque',
     path: '/main/block',
     icon: getIcon('eva:people-fill'),
   },

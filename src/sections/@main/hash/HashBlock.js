@@ -12,9 +12,9 @@ const HashBlock = () => {
   }, [input]);
 
   const dataRow = {
-    leftTitle: 'Data:',
+    leftTitle: 'Datos:',
     textFieldsProps: {
-      label: 'Type something...',
+      label: 'Escribe algo...',
       multiline: true,
       rows: 6,
       value: input,
@@ -23,9 +23,9 @@ const HashBlock = () => {
   };
 
   const hashRow = {
-    leftTitle: 'SHA-256:',
+    leftTitle: 'Hash:',
     textFieldsProps: {
-      label: 'Hashed data (using: SHA-256)',
+      label: 'Hash (usando SHA-256)',
       disabled: true,
       value: hashed,
     },
@@ -34,7 +34,7 @@ const HashBlock = () => {
 
   return (
     <Card>
-      <CardHeader title={"The \"SHA-256\" hash function:"} style={{ padding: '1.1em' }} />
+      <CardHeader title={"Función \"SHA-256\":"} style={{ padding: '1.1em' }} />
       <Divider style={{ marginBottom: '1em' }} />
       <TableWrapper rows={[dataRow, hashRow]} />
     </Card>

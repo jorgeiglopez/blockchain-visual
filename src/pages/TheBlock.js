@@ -9,7 +9,7 @@ export const TheBlock = () => {
       <Container maxWidth="xl">
 
         <Typography variant="h4" sx={{ mb: 5 }}>
-          The block
+          El bloque explicado:
         </Typography>
 
         <Grid container spacing={3}>

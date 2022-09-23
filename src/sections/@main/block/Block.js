@@ -20,9 +20,9 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
   }, [input]);
 
   const dataRow = {
-    leftTitle: 'Data:',
+    leftTitle: 'Datos:',
     textFieldsProps: {
-      label: 'Type something...',
+      label: 'Escribe algo...',
       multiline: true,
       rows: 6,
       value: input.data,
@@ -39,20 +39,20 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
   };
 
   const hashRow = {
-    leftTitle: 'Block hash:',
+    leftTitle: 'Hash:',
     textFieldsProps: {
-      label: 'Hashed data (using: SHA-256)',
+      label: 'Hash (usando SHA-256)',
       disabled: true,
       value: hashed,
       error: !valid,
-      helperText: !valid && 'The block is not signed!'
+      helperText: !valid && 'El bloque no está verificado!'
     },
   };
 
   const prevRow = !!input.previous ? {
-    leftTitle: 'Previous:',
+    leftTitle: 'Hash Previo:',
     textFieldsProps: {
-      label: 'Previous block hash',
+      label: 'Hash del bloque anterior',
       disabled: true,
       value: input.previous
     },
@@ -62,7 +62,7 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
     <Card>
       <Box display={'flex'} padding={'16px'}>
         <Box display={'flex'}>
-          <CardHeader title={"The Block  -  ID #" + input.id} style={{ padding: 0 }} />
+          <CardHeader title={"Bloque  -  ID #" + input.id} style={{ padding: 0 }} />
           <Iconify
             icon={valid ? 'ant-design:check-circle-filled' : 'charm:circle-cross'}
             sx={{ width: '2rem', height: '2rem', ml: '15px', mt: '2px' }}
@@ -77,7 +77,7 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
             onClick={() => mine(input.data)
               .then(result => setInput({ ...input, nonce: result }))}
           >
-            MINE!
+            MINAR!
           </Button>
         </Box>
       </Box>

@@ -12,15 +12,6 @@ const Row = ({ leftTitle, textFieldsProps }) => {
       <TableCell style={{ verticalAlign: 'top', borderBottom: 'none' }}>
         <TextField fullWidth={true} variant={'outlined'} {...textFieldsProps} />
       </TableCell>
-      {/* <TableCell>
-        <Button
-          disabled={valid}
-          variant="contained"
-          onClick={() => mine(input.data).then(result => setInput({ ...input, nonce: result }))}
-        >
-          MINE!
-        </Button>
-      </TableCell> */}
     </TableRow>
   );
 };
