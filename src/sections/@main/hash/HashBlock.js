@@ -5,11 +5,12 @@ import TableWrapper from '../../../components/Table';
 
 
 const HashBlock = () => {
-  const [input, setInput] = useState('');
-  const [hashed, setHashed] = useState('');
+  const [block, setBlock] = useState({data: '', hash: ''});
+
   useEffect(() => {
-    sha256(input).then(val => setHashed(val));
-  }, [input]);
+    sha256(block.data)
+      .then(val => setBlock({...block, hash: val}));
+  }, [block.data]);
 
   const dataRow = {
     leftTitle: 'Datos:',
@@ -17,8 +18,8 @@ const HashBlock = () => {
       label: 'Escribe algo...',
       multiline: true,
       rows: 6,
-      value: input,
-      onChange: (e) => setInput(e.target.value)
+      value: block.data,
+      onChange: (e) => setBlock({...block, data: e.target.value})
     },
   };
 
@@ -27,7 +28,7 @@ const HashBlock = () => {
     textFieldsProps: {
       label: 'Hash (usando SHA-256)',
       disabled: true,
-      value: hashed,
+      value: block.hash,
     },
   };
 

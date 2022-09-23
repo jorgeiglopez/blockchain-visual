@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useReducer } from 'react';
 import { sha256Block } from '../../../utils/crypto';
 import { mineBlock } from '../../../utils/mine';
+import { HashBlock } from '../hash';
 import DummyBlock from './DummyBlock';
 
 
@@ -13,66 +14,14 @@ const defaultBlocks = [
   { id: 3, data: '', nonce: '10904', hash: '', previous: '0000c13b5d7c6b636942c8e62f5ab023bcce895b5907237e3f4ff548e138ccc3' },
 ];
 
-const assesValidity = blocks => {
-  let allValid = true; // Replace by reducer()
-  for (let index = 0; index < blocks.length; index++) {
-    allValid = allValid && blocks[index].valid;
-  }
-  return allValid;
-}
-
-const mineAll = async blocks => {
-  let newBlocks = [...blocks];
-  let lastHash = null;
-
-  for (let i = 0; i < newBlocks.length; i++) {
-    let block = newBlocks[i];
-    block.previous = lastHash;
-    block = await sha256Block(block);
-    if (!block.valid) {
-      console.log("----Block Not signed: ", block)
-      block = await mineBlock(block);
-    }
-    lastHash = block.hash;
-    newBlocks[i] = block;
-  }
-  console.log("All mined: ", newBlocks);
-  return newBlocks;
-};
-
-
-const updateBlock = (blocks, block) => {
-  for (let index = 0; index < blocks.length; index++) {
-    if(blocks[index].id === block.id) {
-      blocks[index] = block;
-    }
-    if(blocks[index].id > block.id) {
-      blocks[index].valid = false;
-    }
-  }
-}
 
 const reducer = (state, action) => {
   const newState = { ...state };
 
   switch (action.type) {
-    case 'init': {
-      if (!state.init) {
-        return { ...newState, init: true, allValid: false, blocks: action.value };
-      }
-      return newState;
-    }
-
-    case 'mineAll': {
-      if (state.init) {
-        return { ...newState, allValid: true, blocks: action.value };
-      }
-      return newState;
-    }
-
     case 'updateBlock': {
-      updateBlock(newState.blocks, action.value);
-      return {...newState, allValid: assesValidity(newState.blocks)};
+      newState.blocks[action.value.id - 1] = action.value;
+      return newState;
     }
 
     default: {
@@ -83,31 +32,37 @@ const reducer = (state, action) => {
 
 
 const BlockchainContainer = () => {
-  const [state, dispatch] = useReducer(reducer, { init: false });
+  const [state, dispatch] = useReducer(reducer, { blocks: defaultBlocks });
 
   useEffect(() => {
-    if (!state.init) {
-      console.log('---> init');
-      dispatch({ type: 'init', value: defaultBlocks });
+    for (let index = 0; index < state.blocks.length; index++) {
+      sha256Block(state.blocks[index]).then(nb => dispatch({ type: 'updateBlock', value: nb }));
     }
-  }, [state.init]);
+  }, [JSON.stringify(state.blocks)]);
 
-  useEffect(() => {
-    if (state.init && !state.allValid) {
-      console.log('-----> mineAll');
-      mineAll(state.blocks)
-      .then(result => {dispatch({ type: 'mineAll', value: result })});
-    }
-    console.log("STATE: ", state);
-  }, [state.allValid, state.init]);
+
+  // useEffect(() => {
+  //   console.log("An update....")
+  //   async function updateAll() {
+  //     let prev = '';
+  //     for (let index = 0; index < state.blocks.length; index++) {
+  //       state.blocks[index].previous = prev;
+  //       const newBlock = await sha256Block(state.blocks[index]);
+  //       console.log('The new block:', newBlock)
+  //       dispatch({ type: 'updateBlock', value: newBlock })
+  //       prev = newBlock.hash;
+  //     }
+  //     updateAll();
+  //   }
+  // }, [JSON.stringify(state.blocks)]);
 
   return (
     <Grid container spacing={3}>
       {state.blocks && state.blocks.length > 0 ?
         state.blocks?.map(block =>
           <Grid item xs={12} sm={6} md={4} key={block.id}>
-            <DummyBlock {...block} dispatch={dispatch}/>
-          </Grid>) : <Grid item xs={12} sm={6} md={4}><div>Loading...</div></Grid>}
+            <DummyBlock block={block} dispatch={dispatch} />
+          </Grid>) : <div>Loading...</div>}
     </Grid>
   );
 };

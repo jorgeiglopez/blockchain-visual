@@ -1,23 +1,19 @@
 import { Box, Button, Card, CardHeader, Divider } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { sha256 } from '../../../utils/crypto';
-import { mine, isValid } from '../../../utils/mine';
+import { sha256Block } from '../../../utils/crypto';
+import { mineBlock } from '../../../utils/mine';
 import TableWrapper from '../../../components/Table';
 import Iconify from '../../../components/Iconify';
 
 
-const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => {
-  const [input, setInput] = useState(setup);
-  const [hashed, setHashed] = useState('');
-  const [valid, setValid] = useState(false);
-  
+const Block = ({id = 1, data = '', nonce = '88484', hash = '', previous = ''}) => {
+  const [block, setBlock] = useState({id, data, nonce, hash, previous})
+
   useEffect(() => {
-    const toHash = input.data.concat(!!input.previous? input.previous : '').concat(input.nonce);
-    sha256(toHash).then(val => {
-      setHashed(val);
-      setValid(isValid(val));
+    sha256Block(block).then(val => {
+      setBlock(val);
     });
-  }, [input]);
+  }, [block.data, block.nonce]);
 
   const dataRow = {
     leftTitle: 'Datos:',
@@ -25,16 +21,16 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
       label: 'Escribe algo...',
       multiline: true,
       rows: 6,
-      value: input.data,
-      onChange: (e) => setInput({ ...input, data: e.target.value })
+      value: block.data,
+      onChange: (e) => setBlock({ ...block, data: e.target.value })
     },
   };
 
   const nonceRow = {
     leftTitle: 'Nonce:',
     textFieldsProps: {
-      value: input.nonce,
-      onChange: (e) => setInput({ ...input, nonce: e.target.value })
+      value: block.nonce,
+      onChange: (e) => setBlock({ ...block, nonce: e.target.value })
     },
   };
 
@@ -43,18 +39,18 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
     textFieldsProps: {
       label: 'Hash (usando SHA-256)',
       disabled: true,
-      value: hashed,
-      error: !valid,
-      helperText: !valid && 'El bloque no está verificado!'
+      value: block.hash,
+      error: !block.valid,
+      helperText: !block.valid && 'El bloque no está verificado!'
     },
   };
 
-  const prevRow = !!input.previous ? {
+  const prevRow = !!block.previous ? {
     leftTitle: 'Hash Previo:',
     textFieldsProps: {
       label: 'Hash del bloque anterior',
       disabled: true,
-      value: input.previous
+      value: block.previous
     },
   } : null;
 
@@ -62,20 +58,20 @@ const Block = ({ setup = { id: 1, data: '', nonce: '88484', previous: '' }}) => 
     <Card>
       <Box display={'flex'} padding={'16px'}>
         <Box display={'flex'}>
-          <CardHeader title={"Bloque  -  ID #" + input.id} style={{ padding: 0 }} />
+          <CardHeader title={"Bloque  -  ID #" + block.id} style={{ padding: 0 }} />
           <Iconify
-            icon={valid ? 'ant-design:check-circle-filled' : 'charm:circle-cross'}
+            icon={block.valid ? 'ant-design:check-circle-filled' : 'charm:circle-cross'}
             sx={{ width: '2rem', height: '2rem', ml: '15px', mt: '2px' }}
-            color={valid ? 'green' : 'red'}
+            color={block.valid ? 'green' : 'red'}
           />
         </Box>
         <Box ml={'auto'}>
           <Button
             ml={'auto'}
-            disabled={valid}
+            disabled={block.valid}
             variant="contained"
-            onClick={() => mine(input.data)
-              .then(result => setInput({ ...input, nonce: result }))}
+            onClick={() => mineBlock(block)
+              .then(result => setBlock({...result}))}
           >
             MINAR!
           </Button>

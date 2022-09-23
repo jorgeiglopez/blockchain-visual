@@ -23,6 +23,7 @@ export const mineBlock = async block => {
       return block;
     }
   }
+  console.warn("Couldn't find nonce for the block!")
   return null;
 }
 

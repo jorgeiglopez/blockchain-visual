@@ -18,3 +18,7 @@ export const sha256Block = async block => {
   newBlock.valid = isValid(hash);
   return newBlock;
 }
+
+export const hashShortener = hash => {
+  return hash.substring(0, 12).concat(' [ ... ] ').concat(hash.substring(hash.length - 12, hash.length - 1));
+};
