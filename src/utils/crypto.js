@@ -19,6 +19,16 @@ export const sha256Block = async block => {
   return newBlock;
 }
 
+export const sha256Blockchain = async blockchain => {
+  let prevHash = '';
+  for (let index = 0; index < blockchain.length; index++) {
+    blockchain[index].previous = prevHash; 
+    blockchain[index] = await sha256Block(blockchain[index]);
+    prevHash = blockchain[index].hash;
+  }
+  return blockchain;
+}
+
 export const hashShortener = hash => {
   return hash.substring(0, 12).concat(' [ ... ] ').concat(hash.substring(hash.length - 12, hash.length - 1));
 };

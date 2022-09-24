@@ -3,15 +3,23 @@ import TableWrapper from '../../../components/Table';
 import { Box, Button, Card, CardHeader, Divider } from '@mui/material';
 import Iconify from '../../../components/Iconify';
 import { hashShortener, sha256Block } from '../../../utils/crypto';
+import { mineBlock } from '../../../utils/mine';
 
 const DummyBlock = ({block, dispatch}) => {
 
   const onDataChangeHandler = e => {
-    sha256Block({ ...block, data: e.target.value }).then(bl =>  dispatch({ type: 'updateBlock', value: bl }));
+    sha256Block({ ...block, data: e.target.value })
+      .then(bl =>  dispatch({ type: 'updateBlock', value: bl }));
   }
 
   const onNonceChangeHandler = e => {
-    sha256Block({ ...block, nonce: e.target.value }).then(bl => dispatch({ type: 'updateBlock', value: bl }));
+    sha256Block({ ...block, nonce: e.target.value })
+      .then(bl => dispatch({ type: 'updateBlock', value: bl }));
+  }
+
+  const onMineButtonHandler = () => {
+    mineBlock(block)
+      .then(bl => dispatch({ type: 'updateBlock', value: bl }));
   }
 
   const dataRow = {
@@ -69,8 +77,7 @@ const DummyBlock = ({block, dispatch}) => {
             ml={'auto'}
             disabled={!!block.valid}
             variant="contained"
-          // onClick={() => mine(data)
-          //   .then(result => setInput({ ...input, nonce: result }))}
+            onClick={onMineButtonHandler}
           >
             MINAR!
           </Button>
