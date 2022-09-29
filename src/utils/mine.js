@@ -1,11 +1,11 @@
-import { sha256 } from './crypto';
+import { getContentToHash, sha256 } from './crypto';
 
-const blockSignature = '0000';
+const BLOCK_SIGNATURE = '0000';
 
 export const mine = async data => {
   for (let index = 0; index < 1000000; index++) {
     const hash = await sha256(data.concat(index.toString()));
-    if(hash.startsWith(blockSignature)){
+    if(hash.startsWith(BLOCK_SIGNATURE)){
       return index;
     }
   }
@@ -14,9 +14,8 @@ export const mine = async data => {
 
 export const mineBlock = async block => {
   for (let index = 0; index < 1000000; index++) {
-    const toHash = block.data.concat(!!block.previous ? block.previous : '').concat(index);
-    const hash = await sha256(toHash);
-    if(hash.startsWith(blockSignature)){
+    const hash = await sha256(getContentToHash(block, index));
+    if(hash.startsWith(BLOCK_SIGNATURE)){
       block.hash = hash;
       block.nonce = index;
       block.valid = isValid(hash)
@@ -29,7 +28,7 @@ export const mineBlock = async block => {
 
 export const isValid = (val) => {
   if (!!val && typeof val === 'string') {
-    return val.startsWith(blockSignature);
+    return val.startsWith(BLOCK_SIGNATURE);
   }
   return false;
 };

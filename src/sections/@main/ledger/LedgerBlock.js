@@ -10,8 +10,8 @@ import TableWrapper from '../../../components/Table';
 const LedgerBlock = ({ block, dispatch }) => {
   const [loading, setLoading] = useState(false);
 
-  const onDataChangeHandler = e => {
-    sha256Block({ ...block, data: e.target.value })
+  const onTransactionChange = tx => {
+    sha256Block({ ...block, tx })
       .then(bl => dispatch({ type: 'updateBlock', value: bl }));
   };
 
@@ -31,7 +31,8 @@ const LedgerBlock = ({ block, dispatch }) => {
 
   const txRow = {
     leftTitle: 'TX:',
-    transactions: block.tx
+    transactions: block.tx,
+    onTransactionChange
   };
 
   const nonceRow = {
