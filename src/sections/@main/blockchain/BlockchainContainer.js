@@ -1,15 +1,20 @@
-import { Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
 import { useReducer } from 'react';
 import { sha256Blockchain } from '../../../utils/crypto';
 import DummyBlock from './DummyBlock';
+// import { makeStyles } from "@material-ui/core/styles";
+import { Stack } from '@mui/system';
 
 
 const defaultBlocks = [
   { id: 1, data: '', nonce: '88484', hash: '' },
-  { id: 2, data: '', nonce: '158818', hash: '', previous: '0000a456e7b5a5eb059e721fb431436883143101275c4077f83fe70298f5623d' },
-  { id: 3, data: '', nonce: '10904', hash: '', previous: '0000c13b5d7c6b636942c8e62f5ab023bcce895b5907237e3f4ff548e138ccc3' },
+  { id: 2, data: '', nonce: '158818', hash: '', previous: '' },
+  { id: 3, data: '', nonce: '10904', hash: '', previous: '' },
+  { id: 4, data: '', nonce: '19496', hash: '', previous: '' },
+  { id: 5, data: '', nonce: '140382', hash: '', previous: '' },
+  { id: 6, data: '', nonce: '83295', hash: '', previous: '' },
 ];
 
 const reducer = (state, action) => {
@@ -32,23 +37,45 @@ const reducer = (state, action) => {
   }
 };
 
+// const useStyles = makeStyles({
+//   imageList: {
+//     direction: "row",
+//   spacing: "12"
+//   },
+//   image: {
+//     minWidth: 450,
+//     maxWidth: 450,
+//     marginRight: 16,
+//     marginBottom: 16
+//   }
+// });
 
 const BlockchainContainer = () => {
   const [state, dispatch] = useReducer(reducer, { blocks: defaultBlocks });
-
+  // const classes = useStyles();
   useEffect(() => {
     sha256Blockchain(state.blocks)
       .then(all => dispatch({ type: 'updateBlock', value: all }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(state.blocks)]);
 
   return (
-    <Grid container spacing={3}>
+    <>
+    {/* <Grid container spacing={3} wrap={'wrap'}>
       {state.blocks && state.blocks.length > 0 ?
         state.blocks?.map(block =>
           <Grid item xs={12} sm={6} md={4} key={block.id}>
             <DummyBlock block={block} dispatch={dispatch} />
           </Grid>) : <div>Loading...</div>}
-    </Grid>
+    </Grid> */}
+    <Stack direction="row" spacing={2}>
+    {state.blocks && state.blocks.length > 0 ?
+        state.blocks?.map(block =>
+          <Box sx={{minWidth: 340, width: 400, maxWidth: 550, flexShrink: 0 }} key={block.id}>
+            <DummyBlock block={block} dispatch={dispatch} />
+          </Box>) : <div>Loading...</div>}
+    </Stack>
+    </>
   );
 };
 

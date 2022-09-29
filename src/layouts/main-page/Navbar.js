@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import Iconify from '../../components/Iconify';
-import Logo from '../../components/Logo';
+// import Logo from '../../components/Logo';
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 64;

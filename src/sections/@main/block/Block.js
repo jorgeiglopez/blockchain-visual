@@ -19,9 +19,9 @@ const Block = ({ id = 1, data = '', nonce = '88484', hash = '', previous = '' })
   }, [block.data, block.nonce]);
 
   const dataRow = {
-    leftTitle: 'Datos:',
+    leftTitle: 'Data:',
     textFieldsProps: {
-      label: 'Escribe algo...',
+      label: 'Write something...',
       multiline: true,
       rows: 6,
       value: block.data,
@@ -40,18 +40,18 @@ const Block = ({ id = 1, data = '', nonce = '88484', hash = '', previous = '' })
   const hashRow = {
     leftTitle: 'Hash:',
     textFieldsProps: {
-      label: 'Hash (usando SHA-256)',
+      label: 'Hash (using SHA-256)',
       disabled: true,
       value: block.hash,
       error: !block.valid,
-      helperText: !block.valid && 'El bloque no está verificado!'
+      helperText: !block.valid && 'The block isn\'t signed!'
     },
   };
 
   const prevRow = !!block.previous ? {
-    leftTitle: 'Hash Previo:',
+    leftTitle: 'Previous Hash:',
     textFieldsProps: {
-      label: 'Hash del bloque anterior',
+      label: 'Hash of the previous block',
       disabled: true,
       value: block.previous
     },
@@ -61,7 +61,7 @@ const Block = ({ id = 1, data = '', nonce = '88484', hash = '', previous = '' })
     <Card>
       <Box display={'flex'} padding={'16px'}>
         <Box display={'flex'}>
-          <CardHeader title={"Bloque  -  ID #" + block.id} style={{ padding: 0 }} />
+          <CardHeader title={"Block  -  ID #" + block.id} style={{ padding: 0 }} />
           {loading ?
             <CircularProgress size="2rem" style={{ marginLeft: '16px' }} />
             :
@@ -85,7 +85,7 @@ const Block = ({ id = 1, data = '', nonce = '88484', hash = '', previous = '' })
             }
             }
           >
-            MINAR!
+            MINE!
           </Button>
         </Box>
       </Box>
