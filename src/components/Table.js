@@ -1,11 +1,15 @@
 import React from 'react';
 import { Table, TableBody } from '@mui/material';
 import Row from './Row';
+import DataGridRow from './DataGridRow';
 
 const TableWrapper = ({ rows }) => {
   const MappedRows = rows && rows.length > 0 ? rows
     .filter(row => !!row)
-    .map(row => <Row key={row.leftTitle} {...row}/>) : null;
+    .map(row => 
+      !!row.transactions? <DataGridRow key={row.leftTitle} {...row}/>
+      : <Row key={row.leftTitle} {...row}/>
+    ) : null;
 
   return <Table>
     <colgroup>

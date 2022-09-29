@@ -7,7 +7,7 @@ export const Blockchain = () => {
   return (
     <Page title="Dashboard">
       <Container maxWidth="xxl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
+        <Typography variant="h4" sx={{ mb: 4 }}>
           Chain of blocks:
         </Typography>
         <BlockchainContainer />

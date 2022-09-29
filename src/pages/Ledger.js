@@ -6,8 +6,8 @@ import LedgerContainer from '../sections/@main/ledger/LedgerContainer';
 export const Ledger = () => {
   return (
     <Page title="Dashboard">
-      <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
+      <Container maxWidth="xxl">
+        <Typography variant="h4" sx={{ mb: 4 }}>
           Ledger
         </Typography>
         <LedgerContainer />

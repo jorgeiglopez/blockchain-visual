@@ -10,12 +10,13 @@ const HashBlock = () => {
   useEffect(() => {
     sha256(block.data)
       .then(val => setBlock({...block, hash: val}));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [block.data]);
 
   const dataRow = {
-    leftTitle: 'Datos:',
+    leftTitle: 'Data:',
     textFieldsProps: {
-      label: 'Escribe algo...',
+      label: 'Write something...',
       multiline: true,
       rows: 6,
       value: block.data,
@@ -26,7 +27,7 @@ const HashBlock = () => {
   const hashRow = {
     leftTitle: 'Hash:',
     textFieldsProps: {
-      label: 'Hash (usando SHA-256)',
+      label: 'Hash (using SHA-256)',
       disabled: true,
       value: block.hash,
     },
@@ -35,7 +36,7 @@ const HashBlock = () => {
 
   return (
     <Card>
-      <CardHeader title={"Función \"SHA-256\":"} style={{ padding: '1.1em' }} />
+      <CardHeader title={"The \"SHA-256\" function:"} style={{ padding: '1.1em' }} />
       <Divider style={{ marginBottom: '1em' }} />
       <TableWrapper rows={[dataRow, hashRow]} />
     </Card>

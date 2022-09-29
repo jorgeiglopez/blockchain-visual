@@ -5,14 +5,17 @@ import { useReducer } from 'react';
 import { sha256Blockchain } from '../../../utils/crypto';
 import LedgerBlock from './LedgerBlock';
 
+const tx = [
+  {from: 'John Snow', to: 'Mary', amount: 100}, {from: 'Jammie', to: 'Mary', amount: 34.78}, {from: 'Mary', to: 'Steve', amount: 576.5},
+  {from: 'Jefferson', to: 'Mary', amount: 10.33}, {from: 'Steve', to: 'Yoko', amount: 74.3}];
 
 const defaultBlocks = [
-  { id: 1, data: '', nonce: '88484', hash: '' },
-  { id: 2, data: '', nonce: '158818', hash: '', previous: '' },
-  { id: 3, data: '', nonce: '10904', hash: '', previous: '' },
-  { id: 4, data: '', nonce: '19496', hash: '', previous: '' },
-  { id: 5, data: '', nonce: '140382', hash: '', previous: '' },
-  { id: 6, data: '', nonce: '83295', hash: '', previous: '' },
+  { id: 1, data: '', nonce: '88484', hash: '', tx},
+  { id: 2, data: '', nonce: '158818', hash: '', previous: '', tx },
+  { id: 3, data: '', nonce: '10904', hash: '', previous: '', tx },
+  { id: 4, data: '', nonce: '19496', hash: '', previous: '', tx },
+  { id: 5, data: '', nonce: '140382', hash: '', previous: '', tx },
+  { id: 6, data: '', nonce: '83295', hash: '', previous: '', tx },
 ];
 
 

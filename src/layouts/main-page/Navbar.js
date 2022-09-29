@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { AppBar, Toolbar, IconButton } from '@mui/material';
 import Iconify from '../../components/Iconify';
-// import Logo from '../../components/Logo';
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 64;
@@ -40,10 +39,6 @@ export default function Navbar({ onOpenSidebar }) {
         <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary', display: { lg: 'none' } }}>
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
-        <Box sx={{ flexGrow: 1 }} />
-        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          {/* <Logo/> */}
-        </Stack>
       </ToolbarStyle>
     </RootStyle>
   );

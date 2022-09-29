@@ -32,7 +32,7 @@ export default function DashboardLayout() {
 
   return (
     <RootStyle>
-      <Navbar onOpenSidebar={() => setOpen(true)} />
+       <Navbar onOpenSidebar={() => setOpen(true)} /> {/*// TODO: Fix the blur showing up on desktop */}
       <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle>
         <Outlet />
