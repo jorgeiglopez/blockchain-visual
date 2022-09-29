@@ -8,7 +8,7 @@ export const Blockchain = () => {
     <Page title="Dashboard">
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          La blockchain:
+          Chain of blocks:
         </Typography>
         <BlockchainContainer />
       </Container>

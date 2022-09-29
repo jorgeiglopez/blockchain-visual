@@ -12,7 +12,7 @@ export default function HashFunction() {
       <Container maxWidth="xl">
 
         <Typography variant="h4" sx={{ mb: 5 }}>
-          La función hash:
+          Hash function:
         </Typography>
 
         <Grid container spacing={3}>
