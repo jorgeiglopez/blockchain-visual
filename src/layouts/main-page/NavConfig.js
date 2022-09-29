@@ -19,8 +19,8 @@ const navConfig = [
     icon: getIcon('eva:shopping-bag-fill'),
   },
   {
-    title: 'Distributed',
-    path: '/main/distributed',
+    title: 'Ledger',
+    path: '/main/Ledger',
     icon: getIcon('eva:file-text-fill'),
   },
   {

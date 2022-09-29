@@ -4,7 +4,7 @@ import NotFound from './pages/Page404';
 import HashFunction from "./pages/HashFunction";
 import { TheBlock } from './pages/TheBlock';
 import { Blockchain } from './pages/Blockchain';
-import { Distributed } from './pages/Distributed';
+import { Ledger } from './pages/Ledger';
 import { Tokens } from './pages/Tokens';
 import { Coinbase } from './pages/Coinbase';
 
@@ -18,7 +18,7 @@ export default function Router() {
         { path: 'hash', element: <HashFunction /> },
         { path: 'block', element: <TheBlock /> },
         { path: 'blockchain', element: <Blockchain /> },
-        { path: 'distributed', element: <Distributed /> },
+        { path: 'Ledger', element: <Ledger /> },
         { path: 'tokens', element: <Tokens /> },
         { path: 'coinbase', element: <Coinbase /> },
       ],
