@@ -1,11 +1,10 @@
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import { useEffect } from 'react';
 import { useReducer } from 'react';
 import { sha256Blockchain } from '../../../utils/crypto';
 import DummyBlock from './DummyBlock';
-// import { makeStyles } from "@material-ui/core/styles";
-import { Stack } from '@mui/system';
+// import { Stack } from '@mui/system';
 
 
 const defaultBlocks = [
@@ -37,22 +36,9 @@ const reducer = (state, action) => {
   }
 };
 
-// const useStyles = makeStyles({
-//   imageList: {
-//     direction: "row",
-//   spacing: "12"
-//   },
-//   image: {
-//     minWidth: 450,
-//     maxWidth: 450,
-//     marginRight: 16,
-//     marginBottom: 16
-//   }
-// });
-
 const BlockchainContainer = () => {
   const [state, dispatch] = useReducer(reducer, { blocks: defaultBlocks });
-  // const classes = useStyles();
+
   useEffect(() => {
     sha256Blockchain(state.blocks)
       .then(all => dispatch({ type: 'updateBlock', value: all }));
@@ -61,20 +47,21 @@ const BlockchainContainer = () => {
 
   return (
     <>
-    {/* <Grid container spacing={3} wrap={'wrap'}>
+    <Grid container spacing={3} wrap={'wrap'}>
       {state.blocks && state.blocks.length > 0 ?
         state.blocks?.map(block =>
-          <Grid item xs={12} sm={6} md={4} key={block.id}>
+          <Grid item xs={12} sm={12} md={6} lg={4} key={block.id}>
             <DummyBlock block={block} dispatch={dispatch} />
           </Grid>) : <div>Loading...</div>}
-    </Grid> */}
-    <Stack direction="row" spacing={2}>
+    </Grid>
+    {/* --- With horizontal scrolling, not responsive --- */}
+    {/* <Stack direction="row" spacing={2}>  
     {state.blocks && state.blocks.length > 0 ?
         state.blocks?.map(block =>
           <Box sx={{minWidth: 340, width: 400, maxWidth: 550, flexShrink: 0 }} key={block.id}>
             <DummyBlock block={block} dispatch={dispatch} />
           </Box>) : <div>Loading...</div>}
-    </Stack>
+    </Stack> */}
     </>
   );
 };

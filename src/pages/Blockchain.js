@@ -6,7 +6,7 @@ import BlockchainContainer from '../sections/@main/blockchain/BlockchainContaine
 export const Blockchain = () => {
   return (
     <Page title="Dashboard">
-      <Container maxWidth="xl">
+      <Container maxWidth="xxl">
         <Typography variant="h4" sx={{ mb: 5 }}>
           Chain of blocks:
         </Typography>

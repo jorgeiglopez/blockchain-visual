@@ -16,6 +16,7 @@ const Block = ({ id = 1, data = '', nonce = '88484', hash = '', previous = '' })
     sha256Block(block).then(val => {
       setBlock(val);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [block.data, block.nonce]);
 
   const dataRow = {
