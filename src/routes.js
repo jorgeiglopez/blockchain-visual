@@ -5,21 +5,19 @@ import HashFunction from "./pages/HashFunction";
 import { TheBlock } from './pages/TheBlock';
 import { Blockchain } from './pages/Blockchain';
 import { Ledger } from './pages/Ledger';
-import { Tokens } from './pages/Tokens';
 import { Coinbase } from './pages/Coinbase';
 
 
 export default function Router() {
   return useRoutes([
     {
-      path: '/main',
+      path: '/',
       element: <MainLayout />,
       children: [
         { path: 'hash', element: <HashFunction /> },
         { path: 'block', element: <TheBlock /> },
         { path: 'blockchain', element: <Blockchain /> },
         { path: 'Ledger', element: <Ledger /> },
-        { path: 'tokens', element: <Tokens /> },
         { path: 'coinbase', element: <Coinbase /> },
       ],
     },

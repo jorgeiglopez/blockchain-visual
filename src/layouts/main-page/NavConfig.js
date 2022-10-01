@@ -5,33 +5,28 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 const navConfig = [
   {
     title: 'Hash Function',
-    path: '/main/hash',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    path: '/hash',
+    icon: getIcon('carbon:function'),
   },
   {
     title: 'The block',
-    path: '/main/block',
-    icon: getIcon('eva:people-fill'),
+    path: '/block',
+    icon: getIcon('clarity:block-line'),
   },
   {
     title: 'Blockchain',
-    path: '/main/blockchain',
-    icon: getIcon('eva:shopping-bag-fill'),
+    path: '/blockchain',
+    icon: getIcon('icon-park-outline:blockchain'),
   },
   {
     title: 'Ledger',
-    path: '/main/Ledger',
-    icon: getIcon('eva:file-text-fill'),
-  },
-  {
-    title: 'Tokens',
-    path: '/main/tokens',
-    icon: getIcon('eva:lock-fill'),
+    path: '/Ledger',
+    icon: getIcon('emojione-monotone:ledger'),
   },
   {
     title: 'Coinbase',
-    path: '/main/coinbase',
-    icon: getIcon('eva:person-add-fill'),
+    path: '/coinbase',
+    icon: getIcon('cib:bitcoin'),
   }
 ];
 

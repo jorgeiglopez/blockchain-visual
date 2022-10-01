@@ -12,10 +12,10 @@ const ContentStyle = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   padding: theme.spacing(12, 0)
 }));
-
+ //#FOF2F3
 export default function Page404() {
   return (
-    <Page title="404">
+    <Page title="404" style={{background: "#FOF2F3"}}>
       <Container>
         <ContentStyle sx={{ textAlign: 'center', alignItems: 'center' }}>
           <Typography variant="h3" paragraph>
@@ -29,14 +29,14 @@ export default function Page404() {
 
           <Box
             component="img"
-            src="/static/illustrations/illustration_404.svg"
-            sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
+            src="/static/illustrations/travolta404_2.png"
+            sx={{ mx: 'auto', my: { xs: 5, sm: 10 } }}
           />
 
           <Button to="/" size="large" variant="contained" component={RouterLink}>
             Go to Home
           </Button>
-        </ContentStyle>
+        </ContentStyle> 
       </Container>
     </Page>
   );
