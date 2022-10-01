@@ -14,7 +14,7 @@ export default function Router() {
       path: '/',
       element: <MainLayout />,
       children: [
-        { path: 'hash', element: <HashFunction /> },
+        { path: '', element: <HashFunction /> },
         { path: 'block', element: <TheBlock /> },
         { path: 'blockchain', element: <Blockchain /> },
         { path: 'Ledger', element: <Ledger /> },

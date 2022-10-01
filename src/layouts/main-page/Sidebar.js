@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-// import { Link as useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Drawer } from '@mui/material';
 import useResponsive from '../../hooks/useResponsive';

@@ -5,7 +5,7 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 const navConfig = [
   {
     title: 'Hash Function',
-    path: '/hash',
+    path: '/',
     icon: getIcon('carbon:function'),
   },
   {

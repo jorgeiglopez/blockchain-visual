@@ -27,7 +27,6 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
 }));
 
 
-
 Navbar.propTypes = {
   onOpenSidebar: PropTypes.func,
 };
