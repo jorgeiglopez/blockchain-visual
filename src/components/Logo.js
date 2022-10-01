@@ -10,7 +10,7 @@ Logo.propTypes = {
 
 export default function Logo({ disabledLink = false, sx }) {
   const logo = <Box display={"flex"}>
-    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 60, height: 60, ...sx }} />
+    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 40, height: 40, ...sx }} />
     <Typography variant='overline' align='center' style={{marginLeft: 8, height: 60}}>BC Explained</Typography>
   </Box>
 

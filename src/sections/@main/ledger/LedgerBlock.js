@@ -32,6 +32,7 @@ const LedgerBlock = ({ block, dispatch }) => {
   const txRow = {
     leftTitle: 'TX:',
     transactions: block.tx,
+    coinbase: block.coinbase,
     onTransactionChange
   };
 

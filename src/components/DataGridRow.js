@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material';
 import Iconify from './Iconify';
 
-const DataGridRow = ({ leftTitle, transactions, onTransactionChange }) => {
+const DataGridRow = ({ leftTitle, transactions, coinbase, onTransactionChange }) => {
 
   const updateOneTransaction = (row, e) => {
     const newTx = [...transactions];
@@ -11,7 +11,7 @@ const DataGridRow = ({ leftTitle, transactions, onTransactionChange }) => {
     onTransactionChange(newTx);
   };
 
-  const transactionsBody = transactions.map((row) => (
+  const transactionsBody = transactions && transactions.length > 0 ? transactions.map((row) => (
     <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell>{row.from}</TableCell>
       <TableCell><Iconify icon={'bi:arrow-right'} /></TableCell>
@@ -29,7 +29,7 @@ const DataGridRow = ({ leftTitle, transactions, onTransactionChange }) => {
         />
       </TableCell>
     </TableRow>
-  ));
+  )) : null;
 
   const innerTable = <Table size="small">
     <TableHead>
@@ -45,17 +45,57 @@ const DataGridRow = ({ leftTitle, transactions, onTransactionChange }) => {
     </TableBody>
   </Table>;
 
+
+  const coinbaseRow = coinbase ? <TableRow>
+    <TableCell style={{ verticalAlign: 'top', borderBottom: 'none', padding: '16px 4px 8px 16px'  }}>
+      <Typography variant='subtitle2' gutterBottom>
+        {'CB:'}
+      </Typography>
+    </TableCell>
+    <TableCell style={{ verticalAlign: 'top', borderBottom: 'none', padding: '10px 14px 10px 4px' }}>
+      {<Table size="small" sx={{ width: '100%' }}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Coinbase</TableCell>
+            <TableCell align="right">Amount</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {coinbase.map((cb) => (
+            <TableRow key={cb.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell>{cb.name}</TableCell>
+              <TableCell align="right">
+                ₿ <TextField
+                  id={cb.id}
+                  type='number'
+                  value={cb.amount}
+                  variant="standard"
+                  size="small"
+                  sx={{ width: '64px' }}
+                  inputProps={{ min: 0, style: { textAlign: 'right' } }}
+                  disabled
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>}
+    </TableCell>
+  </TableRow> : null;
   return (
-    <TableRow>
-      <TableCell style={{ verticalAlign: 'top', borderBottom: 'none' }}>
-        <Typography variant='subtitle2' gutterBottom>
-          {leftTitle}
-        </Typography>
-      </TableCell>
-      <TableCell style={{ verticalAlign: 'top', borderBottom: 'none', padding: '10px 14px 10px 4px' }}>
-        {innerTable}
-      </TableCell>
-    </TableRow>
+    <>
+      {coinbaseRow}
+      <TableRow>
+        <TableCell style={{ verticalAlign: 'top', borderBottom: 'none', padding: '16px 4px 8px 16px' }}>
+          <Typography variant='subtitle2' gutterBottom>
+            {leftTitle}
+          </Typography>
+        </TableCell>
+        <TableCell style={{ verticalAlign: 'top', borderBottom: 'none', padding: '10px 14px 10px 4px' }}>
+          {innerTable}
+        </TableCell>
+      </TableRow>
+    </>
   );
 };
 
