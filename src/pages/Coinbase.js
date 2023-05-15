@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import Page from '../components/Page';
 import LedgerContainer from '../sections/@main/ledger/LedgerContainer';
+import PageTitle from '../components/PageTitle';
 
 const defaultCoinbase = [
   {
@@ -60,11 +61,9 @@ const defaultCoinbase = [
 
 export const Coinbase = () => {
   return (
-    <Page title="Dashboard">
-      <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 4 }}>
-          Coinbase
-        </Typography>
+    <Page title="Coinbase">
+      <Container maxWidth="xxl">
+      <PageTitle title={'Coinbase:'}></PageTitle>
         <LedgerContainer defaultBlocks={defaultCoinbase} />
       </Container>
     </Page>

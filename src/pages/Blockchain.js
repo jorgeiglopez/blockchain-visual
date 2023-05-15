@@ -1,15 +1,14 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import Page from '../components/Page';
 import BlockchainContainer from '../sections/@main/blockchain/BlockchainContainer';
+import PageTitle from '../components/PageTitle';
 
 export const Blockchain = () => {
   return (
-    <Page title="Dashboard">
+    <Page title="Blockchain">
       <Container maxWidth="xxl">
-        <Typography variant="h4" sx={{ mb: 4 }}>
-          Chain of blocks:
-        </Typography>
+      <PageTitle title={'Chain of blocks:'}></PageTitle>
         <BlockchainContainer />
       </Container>
     </Page>

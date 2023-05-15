@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import Page from '../components/Page';
 import LedgerContainer from '../sections/@main/ledger/LedgerContainer';
+import PageTitle from '../components/PageTitle';
 
 const defaultLedger = [
   {
@@ -61,11 +62,9 @@ const defaultLedger = [
 
 export const Ledger = () => {
   return (
-    <Page title="Dashboard">
+    <Page title="Ledger">
       <Container maxWidth="xxl">
-        <Typography variant="h4" sx={{ mb: 4 }}>
-          Ledger
-        </Typography>
+        <PageTitle title={'Ledger:'}></PageTitle>
         <LedgerContainer defaultBlocks={defaultLedger} />
       </Container>
     </Page>

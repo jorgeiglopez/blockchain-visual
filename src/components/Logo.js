@@ -16,7 +16,7 @@ export default function Logo({ disabledLink = false, sx }) {
       style={{
         marginLeft: 1,
         fontFamily: "'Arial Narrow', sans-serif",
-        fontSize: '1.6rem',
+        fontSize: '1.4rem',
         transform: 'scaleY(1.5)'
       }}
     >

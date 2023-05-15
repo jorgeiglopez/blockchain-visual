@@ -20,7 +20,7 @@ const navConfig = [
   },
   {
     title: 'Ledger',
-    path: '/Ledger',
+    path: '/ledger',
     icon: getIcon('emojione-monotone:ledger'),
   },
   {

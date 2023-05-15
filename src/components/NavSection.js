@@ -54,10 +54,7 @@ function NavItem({ item, active }) {
   if (children) {
     return (
       <>
-        <ListItemStyle
-          onClick={handleOpen}
-          sx={{ ...(isActiveRoot && activeRootStyle) }}
-        >
+        <ListItemStyle onClick={handleOpen} sx={{ ...(isActiveRoot && activeRootStyle) }} >
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
           <ListItemText disableTypography primary={title} />
           {info && info}
@@ -133,7 +130,7 @@ NavSection.propTypes = {
 export default function NavSection({ navConfig, ...other }) {
   const { pathname } = useLocation();
 
-  const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
+  const match = (path) => (path ? !!matchPath({ path, end: true }, pathname) : false);
 
   return (
     <Box {...other}>
