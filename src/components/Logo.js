@@ -9,14 +9,24 @@ Logo.propTypes = {
 };
 
 export default function Logo({ disabledLink = false, sx }) {
-  const logo = <Box display={"flex"}>
-    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 40, height: 40, ...sx }} />
-    <Typography variant='overline' align='center' style={{marginLeft: 8, height: 60}}>BC Explained</Typography>
-  </Box>
+  const logo = <Box display="flex" alignItems="center">
+    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 40, height: 40 }} mr={1} />
+    <Typography
+      align="left"
+      style={{
+        marginLeft: 1,
+        fontFamily: "'Arial Narrow', sans-serif",
+        fontSize: '1.6rem',
+        transform: 'scaleY(1.5)'
+      }}
+    >
+      BC Explained
+    </Typography>
+  </Box>;
 
   if (disabledLink) {
     return <>{logo}</>;
   }
 
-  return <RouterLink to="/hash">{logo}</RouterLink>;
+  return <RouterLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>{logo}</RouterLink>;
 }
