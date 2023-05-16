@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 Logo.propTypes = {
   disabledLink: PropTypes.bool,
@@ -9,15 +10,23 @@ Logo.propTypes = {
 };
 
 export default function Logo({ disabledLink = false, sx }) {
+  const theme = useTheme();
   const logo = <Box display="flex" alignItems="center">
-    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 40, height: 40 }} mr={1} />
+    <Box component="img" src="/static/icons/blockchain-2.png" sx={{ width: 40, height: 40 }} />
     <Typography
       align="left"
-      style={{
+      sx={{
         marginLeft: 1,
         fontFamily: "'Arial Narrow', sans-serif",
-        fontSize: '1.4rem',
-        transform: 'scaleY(1.5)'
+        transform: 'scaleY(1.5)',
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '1.3rem',
+          fontWeight: 600
+        },
+        [theme.breakpoints.down('lg')]: {
+          fontSize: '1.1rem',
+          fontWeight: 500
+        },
       }}
     >
       BC Explained
