@@ -4,15 +4,13 @@ import { styled } from '@mui/material/styles';
 function PageTitle({title}) {
 
   const TitleStyle = styled('div')(({ theme }) => ({
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.up('lg')]: {
       fontSize: '1.5rem',
-      padding: theme.spacing(1),
-      marginBottom: theme.spacing(2)
     },
     [theme.breakpoints.down('lg')]: {
       fontSize: '1.2rem',
       padding: theme.spacing(1),
-      marginBottom: theme.spacing(1)
     }
   }));
   

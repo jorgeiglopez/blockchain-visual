@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import Page from '../components/Page';
 import LedgerContainer from '../sections/@main/ledger/LedgerContainer';
 import PageTitle from '../components/PageTitle';
+import TextExpander from '../components/TextExpander';
 
 const defaultLedger = [
   {
@@ -64,7 +65,18 @@ export const Ledger = () => {
   return (
     <Page title="Ledger">
       <Container maxWidth="xxl">
-        <PageTitle title={'Ledger:'}></PageTitle>
+        <PageTitle title={'Ledger:'} />
+        <TextExpander title='the Ledger'>
+          <p>A ledger is a record or a log where transactions (financial or otherwise) are listed. Traditionally, ledgers were physical books,
+            but now they are typically digital spreadsheets or databases. Ledgers were typically maintained by a central authority like a
+            bank, a corporation, or a government institution.</p>
+          <br />
+          <p>A blockchain can be understood as a kind of distributed ledger or decentralized database that maintains a continuously
+            growing list of records, called blocks, which are linked and secured using cryptography.
+            The <em>Bitcoin blockchain</em> is a prime example of a blockchain acting as a ledger. Each Bitcoin transaction is recorded on this
+            public, distributed ledger. Anyone can view the transaction history of any Bitcoin, all the way back to when it was first
+            created (mined).</p>
+        </TextExpander>
         <LedgerContainer defaultBlocks={defaultLedger} />
       </Container>
     </Page>
